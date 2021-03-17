@@ -1,4 +1,13 @@
 hola
+<<<<<<< HEAD
 
 
 Hola Mundo Team
+=======
+blabla
+asdfkjñlasdfj
+asdfklasdfkñlj
+jdajjadjajdja
+jajajaj
+console.log("dimitri");
+>>>>>>> cf66c281c6f356ccc357948c8518417b96c434b0
