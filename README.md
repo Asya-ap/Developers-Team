@@ -1,4 +1,4 @@
-/*Forma un equip amb 2 desenvolupadors més que estiguin en aquest mateix Sprint (el mentor pot ajudar-te o suggerir-te companys).
+Forma un equip amb 2 desenvolupadors més que estiguin en aquest mateix Sprint (el mentor pot ajudar-te o suggerir-te companys).
 Haureu de construir el projecte TO-DO. Ha de satisfer els següents requisits:
 
 Creeu una aplicació que permeti portar un llistat de tasques per fer. Ha de contemplar l'opció d'afegir tasques, llistar-les i mostrar el seu 
@@ -8,7 +8,7 @@ totes les tasques o llistar una tasca específica
 Heu d'utilitzar un repositori github seguint la seqüència gitflow */
 
 
-/* crear tasca, actualizar tasca(jhon) / borrar tasca, llistar (anastasia) / frontend (dani)
+# crear tasca, actualizar tasca(jhon) / borrar tasca, llistar (anastasia) / frontend (dani)
 / Crear: rellenar datos, tambien fecha o opcion de crear con esa fecha concreta, si se sabe poner fecha de fin
 / Actualizar lo mismo
 {
