@@ -1,4 +1,6 @@
 const rls = require("readline-sync");
+const actualizar = require("./actualizar");
+const crear = require("./crear");
 
 let appOn = true;
 
@@ -32,11 +34,13 @@ while (appOn) {
   switch (action) {
     case "Create":
       console.log("Hello from create");
+      crear.useCreateMain(crear.archivo, username, "description");
       // Execute create();
       break;
 
     case "Update":
       console.log("Hello from update");
+      actualizar.useUpdateMain();
       // Execute update(task_id);
       break;
 
