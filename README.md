@@ -9,11 +9,11 @@ totes les tasques o llistar una tasca específica.</li>
 <li>Heu d'utilitzar un repositori github seguint la seqüència gitflow</li>
 </ul>
 
-# Crear tasca, actualizar tasca(jhon) / borrar tasca, llistar (anastasia) / frontend (dani)
-# Crear: rellenar datos, tambien fecha o opcion de crear con esa fecha concreta, si se sabe poner fecha de fin
-# Actualizar lo mismo
+<p>Crear tasca, actualizar tasca(jhon) / borrar tasca, llistar (anastasia) / frontend (dani)<br>
+Crear: rellenar datos, tambien fecha o opcion de crear con esa fecha concreta, si se sabe poner fecha de fin<br>
+Actualizar lo mismo.</p>
 
-Estructura tasks.json:
+<p>Estructura tasks.json:</p>
 
 `{
     "id": "1", automatico
@@ -22,8 +22,8 @@ Estructura tasks.json:
     "description": "Ir a comprar amapolas", requerido
     "date_start": "2021-03-21 15:00:00.000", requerido
     "date_end": "2021-03-21 15:30:00.000", requerido
-}
-{
+}`
+`{
     "id": "2",
     "user":"Godofreda",
     "userid": "2", automatico
