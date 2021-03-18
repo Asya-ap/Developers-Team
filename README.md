@@ -23,6 +23,7 @@ Actualizar lo mismo.</p>
     "date_start": "2021-03-21 15:00:00.000", requerido
     "date_end": "2021-03-21 15:30:00.000", requerido
 }`
+<br>
 `{
     "id": "2",
     "user":"Godofreda",
