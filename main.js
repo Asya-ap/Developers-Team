@@ -1,4 +1,6 @@
 const rls = require("readline-sync");
+const actualizar = require("./actualizar");
+const crear = require("./crear");
 
 let appOn = true;
 
@@ -31,11 +33,12 @@ while (appOn) {
 
   switch (action) {
     case "Create":
-      console.log("Hello from create");
+      // Pedir datos
+      crear.useCreateMain(crear.archivo, username, "dentista");
       break;
 
     case "Update":
-      console.log("Hello from update");
+      actualizar.useUpdateMain();
       break;
 
     case "Delete":

@@ -45,7 +45,7 @@ function CreateUpdateJson(file, task) {
     });
 };
         
-function newJson(file, oldTasks, newTask) {
+function newJson(file, oldTasks, newTask=null) {
     var id = 1;
     if (oldTasks) {
         oldTasks.forEach(dato => {
@@ -54,25 +54,28 @@ function newJson(file, oldTasks, newTask) {
         newJsonFile.tasks.sort(sortJson);
         id = newJsonFile.tasks[newJsonFile.tasks.length -1]['id'] + 1;
     }
-    newTask['id'] = id;
-    newJsonFile.tasks.push(newTask);
-    newJsonFile.tasks.sort(sortJson);
+    if (newTask) {
+        newTask['id'] = id;
+        newJsonFile.tasks.push(newTask);
+        newJsonFile.tasks.sort(sortJson);
+    }
     fs.writeFile(file, JSON.stringify(newJsonFile, null, 4), err => {
         if(err) throw err;
-        console.log('New task added');
     })
 };
 
-function useCreateMain(file = archivo, user, description, date_start = today, date_end="", status="Pendind") {
+function useCreateMain(file = archivo, user, description, date_start = today, date_end="", status="Pending") {
+    
     var task = createTask(user, description, date_start, date_end, status);
     CreateUpdateJson(file, task);
+    console.log('New task added');
 }
 
 module.exports = {
     useCreateMain,
-    archivo, today
+    archivo, today,
+    newJson
 }
-
 // Ejemplo de uso
 // const crear = require('./crear'); esto en el main
 // crear.useCreateMain("tasks.json", "Jhon", "Dentista", "martes 17 enero", "martes 17 enero"); esto en el main
