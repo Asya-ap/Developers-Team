@@ -16,21 +16,21 @@ Actualizar lo mismo.</p>
 <p>Estructura tasks.json:</p>
 
 `{
-    "id": "1", automatico
-    "user":"Pepe", requerido
-    "userid": "1", automatico
-    "description": "Ir a comprar amapolas", requerido
-    "date_start": "2021-03-21 15:00:00.000", requerido
-    "date_end": "2021-03-21 15:30:00.000", requerido
+    "id": "1",
+    "user":"Pepe",
+    "userid": "1",
+    "description": "Ir a comprar amapolas",
+    "date_start": "2021-03-21 15:00:00.000",
+    "date_end": "2021-03-21 15:30:00.000"
 }`
 <br>
 `{
     "id": "2",
     "user":"Godofreda",
-    "userid": "2", automatico
+    "userid": "2",
     "description": "Llevar el perro al veterinario",
-    "date_start": "2021-03-26 20:00:00.000", requerido
-    "date_end": "2021-03-26 21:00:00.000", requerido
+    "date_start": "2021-03-26 20:00:00.000",
+    "date_end": "2021-03-26 21:00:00.000"
 }`
 
 */
