@@ -16,21 +16,41 @@ Actualizar lo mismo.</p>
 <p>Estructura tasks.json:</p>
 
 `{
-    "id": "1",
-    "user":"Pepe",
-    "userid": "1",
-    "description": "Ir a comprar amapolas",
-    "date_start": "2021-03-21 15:00:00.000",
-    "date_end": "2021-03-21 15:30:00.000"
+  "id": "1",
+  "user":"Pepe",
+  "userid": "1",
+  "description": "Ir a comprar amapolas",
+  "date_start": "2021-03-21 15:00:00.000",
+  "date_end": "",
+  "status": "To do"
 }`
 <br>
 `{
-    "id": "2",
-    "user":"Godofreda",
-    "userid": "2",
-    "description": "Llevar el perro al veterinario",
-    "date_start": "2021-03-26 20:00:00.000",
-    "date_end": "2021-03-26 21:00:00.000"
+  "id": "2",
+  "user":"Godofreda",
+  "userid": "2",
+  "description": "Llevar el perro al veterinario",
+  "date_start": "2021-03-26 20:00:00.000",
+  "date_end": "",
+  "status": "To do"
 }`
-
-*/
+<br>
+`{
+  "id": "3",
+  "user":"Pepe",
+  "userid": "1",
+  "description": "Cantar",
+  "date_start": "2021-02-21 10:00:00.000",
+  "date_end": "2021-02-21 12:43:00.000",
+  "status": "Done"
+}`
+<br>
+`{
+  "id": "4",
+  "user":"Pepe",
+  "userid": "1",
+  "description": "Programar app",
+  "date_start": "2021-03-15 10:00:00.000",
+  "date_end": "",
+  "status": "Doing"
+}`
