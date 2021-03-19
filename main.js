@@ -31,7 +31,6 @@ function main() {
 
   } else {
     action = "Create";
-    action = "Delete";
   }
 
 
@@ -52,19 +51,16 @@ function main() {
         break;
 
       case "Delete":
-        borrar.deleteTask(borrar.archivo);
 
         action = initialPrompt();
         break;
 
       case "List all":
-        listar.tasksList();
 
         action = initialPrompt();
         break;
 
       case "List specific":
-
 
         action = initialPrompt();
         break;
