@@ -1,9 +1,7 @@
 const rls = require("readline-sync");
 const actualizar = require("./actualizar");
 const crear = require("./crear");
-const searchUser = require("./buscarUsuario.js");
-
-let appOn = true;
+const buscarUsuario = require("./buscarUsuario.js");
 
 function initialPrompt() {
   const actions = ["Create", "Update", "Delete", "List all", "List specific"];
@@ -12,57 +10,66 @@ function initialPrompt() {
   return actions[index];
 }
 
-console.log("Welcome to the TO-DO list app!\n");
+function main() {
+  console.log("Welcome to the TO-DO list app!\n");
 
-while (appOn) {
   const username = rls.question("What is your username? ");
 
-  // Function search for username.
-  const searchUsername = searchUser(username);
+  const searchUsername = buscarUsuario.searchUser(username);
+  let action = "";
 
   if (searchUsername) {
-    console.log(`\nHi ${username}!\n`);
+    console.log(`\nHello again, ${username}!\n`);
+
+    console.log("These are your current tasks:")
+    // Execute function listar().
+
+    action = initialPrompt();
+
   } else {
-    crear.useCreateMain(crear.archivo, username, "description");
+    action = "Create";
   }
 
-  // Execute function listar().
-  console.log("These are your current tasks:")
+  let makingTasks = true;
 
-  let action = initialPrompt();
+  while (makingTasks) {
+    switch (action) {
+      case "Create":
+        crear.useCreateMain(crear.archivo, username, "description");
 
-  switch (action) {
-    case "Create":
-      console.log("Hello from create");
-      crear.useCreateMain(crear.archivo, username, "description");
-      // Execute create();
-      break;
+        action = initialPrompt();
+        break;
 
-    case "Update":
-      console.log("Hello from update");
-      actualizar.useUpdateMain();
-      // Execute update(task_id);
-      break;
+      case "Update":
+        actualizar.useUpdateMain();
 
-    case "Delete":
-      console.log("Hello from delete");
-      // Execute delete(task_id);
-      break;
+        action = initialPrompt();
+        break;
 
-    case "List all":
-      console.log("Hello from list all");
-      // Execute list_all();
-      break;
+      case "Delete":
 
-    case "List specific":
-      console.log("Hello from list specific");
-      // Execute list();
-      break;
 
-    default:
-      console.log("Goodbye!");
-      break;
+        action = initialPrompt();
+        break;
+
+      case "List all":
+
+
+        action = initialPrompt();
+        break;
+
+      case "List specific":
+
+
+        action = initialPrompt();
+        break;
+
+      default:
+        makingTasks = false;
+        console.log("Goodbye!");
+        break;
+    }
   }
-
-  appOn = false;
 }
+
+main();

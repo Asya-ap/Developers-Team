@@ -8,16 +8,15 @@ function searchUser(username) {
 
     for (const task of tasks.tasks) {
       if (username === task.user) {
-        console.log(username);
         return true;
-      } else {
-        console.log("Your username does not seem to exist. Let's create your first task.");
-        break;
       }
     }
   } else {
     console.log("Your username does not seem to exist. Let's create your first task.")
+    return false;
   }
+
+  return false;
 }
 
-module.exports = searchUser;
+module.exports = { searchUser };
