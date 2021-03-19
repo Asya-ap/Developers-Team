@@ -2,7 +2,7 @@ const rls = require("readline-sync");
 const actualizar = require("./actualizar");
 const crear = require("./crear");
 const listar = require("./listar");
-const borrar = require("./borrar");
+const borrar1 = require("./borrar1");
 
 let appOn = true;
 
@@ -48,7 +48,7 @@ while (appOn) {
 
     case "Delete":
       console.log("Hello from delete");
-      borrar.file;
+      borrar1.deleteTask();
       // Execute delete(task_id);
       break;
 
