@@ -34,11 +34,11 @@ while (appOn) {
   switch (action) {
     case "Create":
       // Pedir datos
-      crear.useCreateMain(crear.archivo, username, "dentista");
+      crear.useCreateMain(crear.archivo, username);
       break;
 
     case "Update":
-      actualizar.useUpdateMain();
+      actualizar.useUpdateMain(crear.archivo, username);
       break;
 
     case "Delete":
