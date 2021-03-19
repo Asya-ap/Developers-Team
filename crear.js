@@ -12,6 +12,7 @@ const today = new Date().toDateString();
 // createUpdateJson lee el Json y hace los demas procedimientos
 // newJson segun lo que contenga el Json usa la funcion de sort, si hay algun error se para, si no se vuelve a escribir el json
 // questionsCreate hace las preguntas para crear una tarea si tienen algun valor no valido se asignan unos valores predeterminados, se devuelven las preguntas hechas
+// existFile mira si el archivo existe, si no, lo crea
 // useCreateMain llamada desde el main para crear una nueva tarea
 
 function sortJson (a, b) {
@@ -26,7 +27,7 @@ function sortJson (a, b) {
 
 function existFile(file = archivo) {
     if(fs.existsSync(file)){
-        console.log("El archivo EXISTE!");
+        console.log("File exists");
     }else{
         fs.writeFile(file, '{}', (err) => {
             if (err) {
