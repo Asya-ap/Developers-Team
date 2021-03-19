@@ -1,27 +1,19 @@
 const fs = require("fs");
+const archivo = "./tasks.json"
 
 function taskList(username){
-fs.readFileSync("./tasks.json", "utf8", (err, data)=>{
-    
-    if(err) {
-        console.error(err);
-    }else
-    try{
-        const tasks = JSON.parse(data).tasks;
-        
-        for(const key in tasks){
-            if(tasks.hasOwnProperty(key)){
-            console.log(tasks[key].id);
-            }
+
+    const data = fs.readFileSync(archivo);
+    const tasks = JSON.parse(data);
+
+    tasks.tasks.forEach(element => {
+        if(element.user === username){
+            console.log(element);
         }
-    
-    }catch(error){
-      console.log("Something is wrong");
-    }
-})
+    })
 }
 
-console.log(taskList("2"));
-//module.exports = { taskList };
+
+module.exports = { taskList };
 
 
