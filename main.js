@@ -1,6 +1,7 @@
 const rls = require("readline-sync");
 const actualizar = require("./actualizar");
 const crear = require("./crear");
+const searchUser = require("./buscarUsuario.js");
 
 let appOn = true;
 
@@ -17,13 +18,12 @@ while (appOn) {
   const username = rls.question("What is your username? ");
 
   // Function search for username.
-  const searchUsername = true;
+  const searchUsername = searchUser(username);
 
   if (searchUsername) {
     console.log(`\nHi ${username}!\n`);
   } else {
-    console.log("\nUsername not found. Please, try again.\n");
-    continue;
+    crear.useCreateMain(crear.archivo, username, "description");
   }
 
   // Execute function listar().
