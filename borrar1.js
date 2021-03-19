@@ -1,10 +1,13 @@
 const fs = require('fs');
 
-const file = require("./tasks.json");
+const file = "./tasks.json";
  
 
-function deleteTask(task_id){
-    file.id.forEach(function(element, index){
+function deleteTask(file = file, task_id){
+    fs.readFile(file, 'utf-8', (err, data) =>{
+        
+    })
+    file.tasks.forEach(function(element, index){
         if(file.id[index].id === task_id){
             file.id.splice(index, index);
         }
@@ -12,4 +15,13 @@ function deleteTask(task_id){
 }
 
 module.export = { deleteTask }
+
+fs.readFile(file, 'utf-8', (err, data) => {
+    if(err) {
+        console.log(err);
+    } else {
+        try {
+
+        
+            devolver = JSON.parse(data).tasks;
 

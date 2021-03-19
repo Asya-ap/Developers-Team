@@ -1,16 +1,30 @@
-const fs = require('fs');
-const file = require("./tasks.json");
+const fs = require("fs");
+const archivo = "./tasks.json";
 
-file.delete('/:id', function (err, data){
-    let taskFound = tasks.find(function(task){
-        return task.id === parseInt(data.params.id)
-    });
+function deleteTask(file = archivo, task_id){
+   
+    fs.readFile(file, 'utf8', (err, data) => {
+        if(err){
+            console.log(err);
+        }else{
+            try{
+            devolver = JSON.parse(data).tasks;
 
-    if(taskFound){
-        let tagetIndex = tasks.indexOf(tasksFound);
-        tasks.splice(targetIndex, 1);
+            devolver.forEach((element, index)=>{
+                if(devolver.id === task_id){
+                    devolver.id.splice(index, index);
+                }
+            })
+            } catch(error){
+                console.log("No tasks left");
+                
+            }
+
+            }
+        })
+
     }
-    console.log('Task deleted');
-});
-
-module.exports = { file };
+ console.log(deleteTask());
+    
+    //module.exports = { deleteTask };
+       
