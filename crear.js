@@ -24,6 +24,19 @@ function sortJson (a, b) {
     return 0;
 };
 
+function existFile(file = archivo) {
+    if(fs.existsSync(file)){
+        console.log("El archivo EXISTE!");
+    }else{
+        fs.writeFile(file, '{}', (err) => {
+            if (err) {
+                throw err;
+            }
+            console.log("JSON data is saved.");
+        });
+    }
+}
+
 function createTask(user, description, date_start = today, date_end="", status="Pendind") {
     var newObject = {
         id: 1,
@@ -39,6 +52,7 @@ function createTask(user, description, date_start = today, date_end="", status="
 
 function CreateUpdateJson(file, task) {
     var devolver = [];
+    existFile(archivo);
     fs.readFile(file, 'utf-8', (err, data) => {
         if(err) {
             console.log(err);
@@ -70,7 +84,10 @@ function newJson(file, oldTasks, newTask=null) {
         newJsonFile.tasks.sort(sortJson);
     }
     fs.writeFile(file, JSON.stringify(newJsonFile, null, 4), err => {
-        if(err) throw err;
+        if(err) {
+            console.log("dad");
+            throw err; 
+        }
         console.log("Task completed !");
     })
 };
@@ -98,5 +115,6 @@ function useCreateMain(file = archivo, user) {
 module.exports = {
     useCreateMain,
     archivo, today,
-    newJson
+    newJson,
+    existFile
 }

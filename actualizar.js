@@ -94,6 +94,7 @@ function useUpdateMain(file = crear.archivo, user ) {
     var finalActionUpdate = 0;
     var id = 0;
     var errorUpdate = false;
+    crear.existFile(crear.archivo);
     fs.readFile(file, 'utf-8', (err, data) => {
         if(err) {
             console.log(err);
