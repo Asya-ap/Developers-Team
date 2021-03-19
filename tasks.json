@@ -1,0 +1,36 @@
+{
+    "tasks": [
+        {
+            "id": 1,
+            "user": "j",
+            "description": "nada",
+            "date_start": "today",
+            "date_end": "Fri Mar 19 2021",
+            "status": "done"
+        },
+        {
+            "id": 1,
+            "user": "j",
+            "description": "nada",
+            "date_start": "today",
+            "date_end": "Fri Mar 19 2021",
+            "status": "done"
+        },
+        {
+            "id": 2,
+            "user": "jhon",
+            "description": "jhon",
+            "date_start": "jhon",
+            "date_end": "jhon",
+            "status": "jhon"
+        },
+        {
+            "id": 3,
+            "user": "jhaaaa",
+            "description": "daad",
+            "date_start": "Fri Mar 19 2021",
+            "date_end": "",
+            "status": "Pending"
+        }
+    ]
+}

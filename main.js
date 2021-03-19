@@ -40,9 +40,12 @@ while (appOn) {
 
     case "Update":
       console.log("Hello from update");
-      actualizar.useUpdateMain();
+      actualizar.useUpdateMain(crear.archivo, username);
       // Execute update(task_id);
+
       break;
+
+
 
     case "Delete":
       console.log("Hello from delete");
