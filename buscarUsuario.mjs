@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from 'fs';
 const path = "./tasks.json";
 
 function searchUser(username) {
@@ -15,8 +15,7 @@ function searchUser(username) {
     console.log("Your username does not seem to exist. Let's create your first task.")
     return false;
   }
-
   return false;
 }
 
-module.exports = { searchUser };
+export{ searchUser };
