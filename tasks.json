@@ -2,27 +2,11 @@
     "tasks": [
         {
             "id": 1,
-            "user": "jhon",
-            "description": "dad",
-            "date_start": "da",
-            "date_end": "da",
-            "status": "a"
-        },
-        {
-            "id": 2,
-            "user": "asya",
-            "description": "code",
-            "date_start": "today",
-            "date_end": "today",
-            "status": "doing"
-        },
-        {
-            "id": 3,
-            "user": "asya",
-            "description": "coding",
-            "date_start": "now",
-            "date_end": "now",
-            "status": "done"
+            "user": "djadasd",
+            "description": "asd",
+            "date_start": "adsasd",
+            "date_end": "das",
+            "status": "ddsa"
         }
     ]
 }
