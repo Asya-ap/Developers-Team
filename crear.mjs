@@ -1,11 +1,15 @@
-var fs = require('fs');
-const readline = require('readline-sync');
+import {useListMain} from './listar.mjs';
+import fs from 'fs';
 
-var newJsonFile = {};
-newJsonFile.tasks = [];
+import readline from 'readline-sync';
+
+
 
 const archivo = "./tasks.json";
 const today = new Date().toDateString();
+
+// const badCases = [0, 2]; 0 significa error, 2 que no existe nada
+
 
 // sortJson Ordena los valores segun su id
 // createTask crea una tarea, te la devuelve
@@ -25,16 +29,21 @@ function sortJson (a, b) {
     return 0;
 };
 
+function writeJson(file = archivo, content) {
+    try {
+        fs.writeFileSync(file,JSON.stringify(content, null, 4));
+
+    } catch(err) {
+        console.log(err)
+        return 0
+    }
+
+}
+
 function existFile(file = archivo) {
-    if(fs.existsSync(file)){
-        console.log("File exists");
-    }else{
-        fs.writeFile(file, '{}', (err) => {
-            if (err) {
-                throw err;
-            }
-            console.log("JSON data is saved.");
-        });
+    if(!fs.existsSync(file)) {
+        
+        writeJson(file, "{}");
     }
 }
 
@@ -51,31 +60,40 @@ function createTask(user, description, date_start = today, date_end="", status="
     return newObject
 };
 
-function CreateUpdateJson(file, task) {
-    var devolver = [];
-    existFile(archivo);
-    fs.readFile(file, 'utf-8', (err, data) => {
-        if(err) {
-            console.log(err);
-            return devolver;
-        } else {
-            try{
-                devolver = JSON.parse(data).tasks;
-                newJson(file, devolver, task);
-            } catch {
-                console.log("Check your data file");
+function CreateUpdateJson(file, task, user) {
+    
+    const devolver = useListMain(file, user)[2];
+    if (devolver === 0) {
+        console.log("check json file");
+    } else {
+        try{
+            
+            var updateResult = newJson(file, devolver, task);
+            if (updateResult != 0) {
+                console.log("Succseful! Check your json file")
+                return;
             }
-
+            console.log("Some fail occur with your data it can't be modified");
+    
+        } catch {
+            console.log("Check your data file");
         }
-    });
+    }
 };
         
-function newJson(file, oldTasks, newTask=null) {
+function newJson(file, oldTasks, newTask) {
     var id = 1;
+    var newJsonFile = {};
+    newJsonFile.tasks = [];
     if (oldTasks && oldTasks.length > 0) {
+        // El error parece estar en el oldtasks que se mandan
         oldTasks.forEach(dato => {
-            if(dato) newJsonFile.tasks.push(dato);
+            if(dato){
+                newJsonFile.tasks.push(dato);
+
+            }
         });
+
         newJsonFile.tasks.sort(sortJson);
         id = newJsonFile.tasks[newJsonFile.tasks.length -1]['id'] + 1;
     }
@@ -84,13 +102,8 @@ function newJson(file, oldTasks, newTask=null) {
         newJsonFile.tasks.push(newTask);
         newJsonFile.tasks.sort(sortJson);
     }
-    fs.writeFile(file, JSON.stringify(newJsonFile, null, 4), err => {
-        if(err) {
-            console.log("dad");
-            throw err; 
-        }
-        console.log("Task completed !");
-    })
+    var newJsonResult = writeJson(file, newJsonFile);
+    return newJsonResult
 };
 
 function questionsCreate(){
@@ -106,16 +119,13 @@ function questionsCreate(){
     return [description, date_start, date_end, status];
 }
 function useCreateMain(file = archivo, user) {
-    
 
     var questions = questionsCreate();
     var task = createTask(user, questions[0], questions[1], questions[2], questions[3]);
-    CreateUpdateJson(file, task);
+    CreateUpdateJson(file, task, user);
+    
 }
+// useCreateMain(archivo, "Jhon");
 
-module.exports = {
-    useCreateMain,
-    archivo, today,
-    newJson,
-    existFile
-}
+// useCreateMain(archivo, "jhon");
+export { existFile, archivo, useCreateMain, today, newJson, writeJson};

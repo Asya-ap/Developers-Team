@@ -1,14 +1,14 @@
-const rls = require("readline-sync");
-const actualizar = require("./actualizar");
-const crear = require("./crear");
-const buscarUsuario = require("./buscarUsuario.js");
-const listar = require("./listar");
-const borrar = require("./borrar");
+import {useListMain} from './listar.mjs';
+import { archivo, useCreateMain} from './crear.mjs'
+import {useUpdateMain} from './actualizar.mjs'
+import {deleteTask} from './borrar.mjs'
+import {searchUser} from './buscarUsuario.mjs'
 
+import readline from 'readline-sync';
 
 function initialPrompt() {
   const actions = ["Create", "Update", "Delete", "List all", "List specific"];
-  const index = rls.keyInSelect(actions, "Select your action:");
+  const index = readline.keyInSelect(actions, "Select your action:");
 
   return actions[index];
 }
@@ -16,20 +16,21 @@ function initialPrompt() {
 function main() {
   console.log("Welcome to the TO-DO list app!\n");
 
-  const username = rls.question("What is your username? ");
+  const username = readline.question("What is your username? ");
 
-  const searchUsername = buscarUsuario.searchUser(username);
+  const searchUsername = searchUser(username);
   let action = "";
 
   if (searchUsername) {
     console.log(`\nHello again, ${username}!\n`);
 
     console.log("These are your current tasks:")
-    // Execute function listar().
+    useListMain(archivo, username, true);
 
     action = initialPrompt();
 
   } else {
+    console.log(`\nHello ${username}, lets create a new task! \n`)
     action = "Create";
   }
 
@@ -39,24 +40,26 @@ function main() {
   while (makingTasks) {
     switch (action) {
       case "Create":
-        crear.useCreateMain(crear.archivo, username);
+        useCreateMain(archivo, username);
 
         action = initialPrompt();
         break;
 
       case "Update":
-        actualizar.useUpdateMain(crear.archivo, username);
+        useUpdateMain(archivo, username);
 
         action = initialPrompt();
         break;
 
       case "Delete":
 
+      deleteTask(archivo, username);
         action = initialPrompt();
         break;
 
       case "List all":
 
+        useListMain(archivo, username, true);
         action = initialPrompt();
         break;
 
