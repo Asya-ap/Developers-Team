@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import {useListMain} from './listar.mjs';
-=======
 import {useListMain, listTasks, oneTask} from './listar.mjs';
->>>>>>> depJhon
 import { archivo, useCreateMain} from './crear.mjs'
 import {useUpdateMain} from './actualizar.mjs'
 import {deleteTask} from './borrar.mjs'
