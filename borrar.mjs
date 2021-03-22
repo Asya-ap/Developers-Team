@@ -3,19 +3,8 @@ import {listTasksOnlyUser} from './listar.mjs';
 import {archivo} from './crear.mjs'
 import {makeDesicion, searchElement} from './actualizar.mjs'
 
-//* IMPORTANTE: 0 SIGNIFICA QUE USUARIO QUIERE SALIR
-//* IMPORTANTE: 1 SIGNIFICA ARCHIVO DAÑADO
-//* EMPORTANTE: 2 SIGNIFICA QUE NO TIENE NINGUNA TAREA
-
-// Constants para archivo y fechas
 
 // Constante que me ayudara a guardar el nuevo Json
-var newJsonFile = {};
-newJsonFile.tasks = [];
-
-var exitCase = ['Q', 'E', 'EXIT'];
-
-
 
 function deleteTask(file = archivo, user) {
     

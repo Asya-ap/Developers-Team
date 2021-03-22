@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { searchElement } from './actualizar.mjs';
 import {existFile, archivo} from './crear.mjs'
 
 function listTasks(file = archivo, option ="y") {
@@ -19,6 +20,18 @@ function listTasks(file = archivo, option ="y") {
         console.log(err)
         return 1;
     }
+}
+function oneTask(file, user) {
+    var tasksData = useListMain(file, user, false);
+    var tasks = tasksData[2];
+    var idsUser = tasksData[1];
+    var elementData = searchElement(tasks, idsUser);
+    if (elementData[0] !== 0 && elementData[0] !== 2){
+        console.log(elementData[0]);
+    } else {
+        console.log("Exit option");
+    }
+
 }
 
 function listTasksOnlyUser(file, user, option = 'y') {
@@ -59,7 +72,7 @@ function onlyUser(user, devolver, option = 'y') {
 }
 
 function useListMain(file = archivo, user, show = false) {
-    const tasks = listTasksOnlyUser(file, user);
+    const tasks = listTasksOnlyUser(file, user, 'y');
     if (tasks[0] === 0 || tasks[0] === 2) {
         var message = tasks[0] === 0 ? "Check Json fil" : "You don't have any data";
         console.log(message);
@@ -72,4 +85,4 @@ function useListMain(file = archivo, user, show = false) {
 }
 
 
-export { useListMain, listTasks, onlyUser, listTasksOnlyUser};
+export { useListMain, listTasks, onlyUser, listTasksOnlyUser, oneTask};

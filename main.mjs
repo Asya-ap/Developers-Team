@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {useListMain} from './listar.mjs';
+=======
+import {useListMain, listTasks, oneTask} from './listar.mjs';
+>>>>>>> depJhon
 import { archivo, useCreateMain} from './crear.mjs'
 import {useUpdateMain} from './actualizar.mjs'
 import {deleteTask} from './borrar.mjs'
@@ -53,7 +57,7 @@ function main() {
 
       case "Delete":
 
-      deleteTask(archivo, username);
+        deleteTask(archivo, username);
         action = initialPrompt();
         break;
 
@@ -65,6 +69,7 @@ function main() {
 
       case "List specific":
 
+        oneTask(archivo, username);
         action = initialPrompt();
         break;
 
