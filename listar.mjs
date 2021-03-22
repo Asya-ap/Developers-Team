@@ -20,12 +20,16 @@ function listTasks(file = archivo, option ="y") {
         return 1;
     }
 }
+function oneTask(file, user) {
+    var tasks = useListMain(file, user);
+
+}
 
 function listTasksOnlyUser(file, user, option = 'y') {
     var tasks = listTasks(file, 'n');
-    console.log("crear 26")
+
     console.log(tasks)
-    console.log("crear 26")
+
     if (tasks !== 2 || tasks !== 1){
         var tasksUser = onlyUser(user, tasks, 'n');
         if (tasksUser[0] !== 2) {

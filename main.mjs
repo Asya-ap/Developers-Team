@@ -52,7 +52,7 @@ function main() {
 
       case "Delete":
 
-      deleteTask(archivo, username);
+        deleteTask(archivo, username);
         action = initialPrompt();
         break;
 
@@ -64,7 +64,7 @@ function main() {
 
       case "List specific":
 
-
+        
         action = initialPrompt();
         break;
 
