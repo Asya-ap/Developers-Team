@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { searchElement } from './actualizar.mjs';
 import {existFile, archivo} from './crear.mjs'
 
 function listTasks(file = archivo, option ="y") {
@@ -21,13 +22,16 @@ function listTasks(file = archivo, option ="y") {
     }
 }
 function oneTask(file, user) {
-    var tasks = useListMain(file, user);
+    var tasksData = useListMain(file, user);
+    var tasks = tasksData[2];
+    var idsUser = tasksData[1];
+    var elementData = searchElement(tasks, idsUser);
+    console.log(elementData[0]);
 
 }
 
 function listTasksOnlyUser(file, user, option = 'y') {
     var tasks = listTasks(file, 'n');
-
     console.log(tasks)
 
     if (tasks !== 2 || tasks !== 1){
@@ -79,4 +83,4 @@ function useListMain(file = archivo, user, show = false) {
 }
 
 
-export { useListMain, listTasks, onlyUser, listTasksOnlyUser};
+export { useListMain, listTasks, onlyUser, listTasksOnlyUser, oneTask};

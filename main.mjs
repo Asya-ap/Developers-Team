@@ -1,4 +1,4 @@
-import {useListMain, listTasks} from './listar.mjs';
+import {useListMain, listTasks, oneTask} from './listar.mjs';
 import { archivo, useCreateMain} from './crear.mjs'
 import {useUpdateMain} from './actualizar.mjs'
 import {deleteTask} from './borrar.mjs'
@@ -64,7 +64,7 @@ function main() {
 
       case "List specific":
 
-        
+        oneTask(archivo, username);
         action = initialPrompt();
         break;
 
