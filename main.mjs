@@ -30,6 +30,7 @@ function main() {
     action = initialPrompt();
 
   } else {
+    console.log(`\nHello ${username}, lets create a new task! \n`)
     action = "Create";
   }
 
@@ -51,7 +52,7 @@ function main() {
 
       case "Delete":
 
-      deleteTask();
+      deleteTask(archivo, username);
         action = initialPrompt();
         break;
 

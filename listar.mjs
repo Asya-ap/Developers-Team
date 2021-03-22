@@ -23,13 +23,16 @@ function listTasks(file = archivo, option ="y") {
 
 function listTasksOnlyUser(file, user, option = 'y') {
     var tasks = listTasks(file, 'n');
+    console.log("crear 26")
+    console.log(tasks)
+    console.log("crear 26")
     if (tasks !== 2 || tasks !== 1){
         var tasksUser = onlyUser(user, tasks, 'n');
         if (tasksUser[0] !== 2) {
             if (option === 'y') return [tasksUser[0], tasksUser[1], tasks];
             return tasksUser;
         }
-        return [2,2,2]
+        return [2,2,tasks]
     }
     return [tasks, tasks, tasks];
 

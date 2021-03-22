@@ -3,8 +3,7 @@ import fs from 'fs';
 
 import readline from 'readline-sync';
 
-var newJsonFile = {};
-newJsonFile.tasks = [];
+
 
 const archivo = "./tasks.json";
 const today = new Date().toDateString();
@@ -84,10 +83,17 @@ function CreateUpdateJson(file, task, user) {
         
 function newJson(file, oldTasks, newTask) {
     var id = 1;
+    var newJsonFile = {};
+    newJsonFile.tasks = [];
     if (oldTasks && oldTasks.length > 0) {
+        // El error parece estar en el oldtasks que se mandan
         oldTasks.forEach(dato => {
-            if(dato) newJsonFile.tasks.push(dato);
+            if(dato){
+                newJsonFile.tasks.push(dato);
+
+            }
         });
+
         newJsonFile.tasks.sort(sortJson);
         id = newJsonFile.tasks[newJsonFile.tasks.length -1]['id'] + 1;
     }
@@ -116,7 +122,8 @@ function useCreateMain(file = archivo, user) {
 
     var questions = questionsCreate();
     var task = createTask(user, questions[0], questions[1], questions[2], questions[3]);
-    CreateUpdateJson(file, task, user); // Puede
+    CreateUpdateJson(file, task, user);
+    
 }
 // useCreateMain(archivo, "Jhon");
 

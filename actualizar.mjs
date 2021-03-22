@@ -25,42 +25,33 @@ var exitCase = ['Q', 'E', 'EXIT'];
 // sendThis imprime tu modificacion y actualiza las tareas
 // useUpdateMain llamar desde main
 
-function elementId(lista, id, option = "element") {
+function elementId(lista, id) {
     var element = 0;
-    var count = 0;
     lista.forEach(ele => {
-        count++;
         if (ele['id'] == id) {
             element = ele;
-            if (option == "element") {
-                return element;
-
-            }
-            return count; 
         }
     });
-    return element;
+    var count = lista.indexOf(element);
+    return [element, count];
 };
 
 function searchElement(vector, onlyId) {
     var element = 0;
     while (true) {
         console.log("If u want to exit write, (q, e or exit)");
+        console.log(onlyId);
         var idThis = readline.question("Select a task (select an id): ");
-
         var idThisInt = parseInt(idThis);
         if (typeof idThisInt === 'number' && !isNaN(idThisInt)) {
             if (onlyId.includes(idThisInt)){
                 var element = elementId(vector, idThisInt);
-                return [element, idThisInt];
-                
+                return [element[0], element[1]];
             }
         } else {
             if ( exitCase.includes(idThis.toUpperCase()) ) {
                 return [0, idThis];
-                
             }
-                
         }
         console.log("You only can select "); 
         console.log(onlyId);
@@ -97,9 +88,8 @@ function sendThis(element, devolver, file= archivo, message = "update") {
 }
 
 
-function makeChanges(elementUser, idUser, parameter) {
-    console.log(elementUser);
-    console.log(idUser);
+function makeChanges(elementUser, idUser) {
+    var parameter = 0;
     if (elementUser != 0) {
         var keysElement = Object.keys(elementUser);
         keysElement.forEach( key => {
@@ -109,14 +99,14 @@ function makeChanges(elementUser, idUser, parameter) {
         var modified = modifyThis(elementUser);               
         parameter =  modified > 0 ?  1 : 0;
 
-    } else {
-        parameter = 0;
     }
     return [idUser, parameter];
 
 }
 
 function makeDesicion(boolError = false, parameter, devolver, element, id, file = archivo, user, option="update") {
+   // Vienen actualizados devolver y element valen lo mismo
+
     if (!boolError){
 
         if (parameter === 0) {
@@ -128,9 +118,9 @@ function makeDesicion(boolError = false, parameter, devolver, element, id, file 
                 sendThis(element, devolver, file, "update"); 
             }else {
                 console.log(element);
-                var questionCreate = readline.question("Really you want to delete this task? [Y or S, to say yes, anything else will be a no ] ");
+                var questionCreate = readline.question("Really you want to delete this task? [Y or S, to say yes, anything else will be a no ]: ");
                 if (questionCreate.toUpperCase() == 'Y' || questionCreate.toUpperCase() == 'S'){
-                    devolver.splice(id,1);
+                    devolver.splice(id, 1);
                     sendThis(element, devolver, file, "delete");
                 }
                 console.log("Have a nice day !");
@@ -150,8 +140,7 @@ function makeDesicion(boolError = false, parameter, devolver, element, id, file 
     }
 }
 
-
-
+//Poner llamada para imprimir
 function useUpdateMain(file = archivo, user ) {
     var finalActionUpdate = 0;
     var id = 0;

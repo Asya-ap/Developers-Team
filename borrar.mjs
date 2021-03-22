@@ -9,8 +9,6 @@ import {makeDesicion, searchElement} from './actualizar.mjs'
 
 // Constants para archivo y fechas
 
-const username = "jhon";
-
 // Constante que me ayudara a guardar el nuevo Json
 var newJsonFile = {};
 newJsonFile.tasks = [];
@@ -19,7 +17,7 @@ var exitCase = ['Q', 'E', 'EXIT'];
 
 
 
-function deleteTask(file = archivo, user = username) {
+function deleteTask(file = archivo, user) {
     
     var elementsData = listTasksOnlyUser(file, user);
     var finalAction = 0;
@@ -30,12 +28,13 @@ function deleteTask(file = archivo, user = username) {
         finalAction = 1;
     }
     var elementData = searchElement(tasks, idsUser);
-    if (elementData[0] === 0 || elementData[1] ===2){
+    var element = elementData[0];
+    var id = elementData[1];
+    if ( element === 0 || element ===2){
         finalAction = elementData[0];
     }
 
-    var element = elementData[0];
-    var id = elementData[1];
+    
     makeDesicion(false, finalAction, tasks, element, id, file, user, "delete");
 }
 
