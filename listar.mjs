@@ -22,18 +22,20 @@ function listTasks(file = archivo, option ="y") {
     }
 }
 function oneTask(file, user) {
-    var tasksData = useListMain(file, user);
+    var tasksData = useListMain(file, user, false);
     var tasks = tasksData[2];
     var idsUser = tasksData[1];
     var elementData = searchElement(tasks, idsUser);
-    console.log(elementData[0]);
+    if (elementData[0] !== 0 && elementData[0] !== 2){
+        console.log(elementData[0]);
+    } else {
+        console.log("Exit option");
+    }
 
 }
 
 function listTasksOnlyUser(file, user, option = 'y') {
     var tasks = listTasks(file, 'n');
-    console.log(tasks)
-
     if (tasks !== 2 || tasks !== 1){
         var tasksUser = onlyUser(user, tasks, 'n');
         if (tasksUser[0] !== 2) {
@@ -70,7 +72,7 @@ function onlyUser(user, devolver, option = 'y') {
 }
 
 function useListMain(file = archivo, user, show = false) {
-    const tasks = listTasksOnlyUser(file, user);
+    const tasks = listTasksOnlyUser(file, user, 'y');
     if (tasks[0] === 0 || tasks[0] === 2) {
         var message = tasks[0] === 0 ? "Check Json fil" : "You don't have any data";
         console.log(message);

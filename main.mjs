@@ -58,7 +58,7 @@ function main() {
 
       case "List all":
 
-        listTasks(archivo);
+        useListMain(archivo, username, true);
         action = initialPrompt();
         break;
 
