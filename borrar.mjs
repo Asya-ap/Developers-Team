@@ -20,7 +20,7 @@ function deleteTask(file = archivo, user) {
     var element = elementData[0];
     var id = elementData[1];
     if ( element === 0 || element ===2){
-        finalAction = elementData[0];
+        finalAction = element;
     }
 
     

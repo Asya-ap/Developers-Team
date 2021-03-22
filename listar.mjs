@@ -29,7 +29,7 @@ function oneTask(file, user) {
     if (elementData[0] !== 0 && elementData[0] !== 2){
         console.log(elementData[0]);
     } else {
-        console.log("Exit option");
+        console.log("No Data");
     }
 
 }

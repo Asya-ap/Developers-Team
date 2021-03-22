@@ -41,7 +41,11 @@ function searchElement(vector, onlyId) {
     while (true) {
         console.log("If u want to exit write, (q, e or exit)");
         console.log(onlyId);
-        var idThis = readline.question("Select a task (select an id): ");
+        if (typeof onlyId === "object") {
+            var idThis = readline.question("Select a task (select an id): ");
+        } else {
+            return[2,0]
+        }
         var idThisInt = parseInt(idThis);
         if (typeof idThisInt === 'number' && !isNaN(idThisInt)) {
             if (onlyId.includes(idThisInt)){
