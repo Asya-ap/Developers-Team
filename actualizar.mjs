@@ -1,29 +1,20 @@
-// Imports del mismo modulo o del sistema
 import {listTasksOnlyUser } from './listar.mjs';
-import {archivo, writeJson, today, useCreateMain, newJson} from './crear.mjs'
-import fs from 'fs';
+import {archivo, today, useCreateMain, newJson} from './crear.mjs'
 import readline from 'readline-sync';
 
-// Constants para archivo y fechas
-
-const username = "Jhon";
-
-//* IMPORTANTE: 0 SIGNIFICA QUE USUARIO QUIERE SALIR
-//* IMPORTANTE: 1 SIGNIFICA ARCHIVO DAÑADO
-//* EMPORTANTE: 2 SIGNIFICA QUE NO TIENE NINGUNA TAREA
-
-// Constante que me ayudara a guardar el nuevo Json
-var newJsonFile = {};
-newJsonFile.tasks = [];
-
-
 var exitCase = ['Q', 'E', 'EXIT'];
-// elementId busca si es el id esta en la lista, devulve el elemento o un 0
-// searchElement pregunta por un id hasta que existe(elementId) o hasta que decide salir, devuelve el elemento y su indice o un 0 y el valor de busqueda en caso de que se decida salir
-// modifyThis modifica el elemento hasta que se diga, devulve el numero de modificaciones hechas
-// onlyUser te limita a unicamente tu usario, devuelve las tareas disponibles y los id que representan
-// sendThis imprime tu modificacion y actualiza las tareas
-// useUpdateMain llamar desde main
+
+// elementId: Busca si es el id esta en la lista, devulve [elemento,id del elemento en el array]
+// searchElement: Pregunta por un id hasta que existe o hasta que decide salir. Si le pasas un mal parametro te devuele un 0 o un 2.
+// SearchElement: Devuelve los mismo que elementId 
+// modifyThis: Modifica el elemento hasta que se diga, devulve el numero de modificaciones hechas
+// sendThis: Imprime tu modificacion y actualiza las tareas
+// makeChanges: Muestra los parametros actuales de tus tareas, llama a modifyThis. Devuelve [id de la tarea, 1 si se ha modificado algo]
+// makeDecision: Segun los parametros que le pases hace una accion o otra. Se usa mucho
+// useUpdateMain: llamar desde main, es el que se usa para hacer los cambios pertinentes en el Json
+
+// Mirar archivo(crear) , today(crear) , useCreateMain(crear) , newJson(crear)
+// Mirar listTasksOnlyUser(listar)
 
 function elementId(lista, id) {
     var element = 0;

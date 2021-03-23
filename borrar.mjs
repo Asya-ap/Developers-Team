@@ -1,10 +1,10 @@
-// Imports del mismo modulo o del sistema
 import {listTasksOnlyUser} from './listar.mjs';
 import {archivo} from './crear.mjs'
 import {makeDesicion, searchElement} from './actualizar.mjs'
 
+// deleteTask: Eliminara una tarea segun el id que se le pregunte al usuario
 
-// Constante que me ayudara a guardar el nuevo Json
+// Mirar seachElement(crear) , listTasksOnlyUser(listar) , makeDecision(crear) y archivo (crear)
 
 function deleteTask(file = archivo, user) {
     

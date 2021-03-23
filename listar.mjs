@@ -2,6 +2,15 @@ import fs from 'fs';
 import { searchElement } from './actualizar.mjs';
 import {existFile, archivo} from './crear.mjs'
 
+// listTasks: Te devuelve las tareas a no ser que exista algun error.
+// oneTask: Te muestra por consola una tarea concreta a no ser que no haya tareas
+// listsTasksOnlyUser: Devuelve [las tareas de una persona, sus id respectivos, todas las tareas]
+// onlyUser: Devuelve [las tareas de una persona, sus id respectivos]
+// useListMain: Si le pasas true a uno de los parametros, imprime las tareas de cada usuario. Siempre que pase las comprobaciones
+// useListMain: Devuelve lo mismo que listTasksOnlyUser
+
+// Mirar existFile(crear) , archivo(crear) y seachElement(actualizar)
+
 function listTasks(file = archivo, option ="y") {
     
     try {
