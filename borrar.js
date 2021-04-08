@@ -1,6 +1,6 @@
-import {listTasksOnlyUser} from './listar.mjs';
-import {archivo} from './crear.mjs'
-import {makeDesicion, searchElement} from './actualizar.mjs'
+import {listTasksOnlyUser} from './listar.js';
+import {archivo} from './crear.js'
+import {makeDesicion, searchElement} from './actualizar.js'
 
 // deleteTask: Eliminara una tarea segun el id que se le pregunte al usuario
 

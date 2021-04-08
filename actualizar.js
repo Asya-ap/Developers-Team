@@ -1,5 +1,5 @@
-import {listTasksOnlyUser } from './listar.mjs';
-import {archivo, today, useCreateMain, newJson} from './crear.mjs'
+import {listTasksOnlyUser } from './listar.js';
+import {archivo, today, useCreateMain, newJson} from './crear.js'
 import readline from 'readline-sync';
 
 var exitCase = ['Q', 'E', 'EXIT'];

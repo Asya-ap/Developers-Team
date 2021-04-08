@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { searchElement } from './actualizar.mjs';
-import {existFile, archivo} from './crear.mjs'
+import { searchElement } from './actualizar.js';
+import {existFile, archivo} from './crear.js'
 
 // listTasks: Te devuelve las tareas a no ser que exista algun error.
 // oneTask: Te muestra por consola una tarea concreta a no ser que no haya tareas

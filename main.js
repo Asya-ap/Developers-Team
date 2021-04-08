@@ -1,8 +1,8 @@
-import {useListMain, listTasks, oneTask} from './listar.mjs';
-import { archivo, useCreateMain} from './crear.mjs'
-import {useUpdateMain} from './actualizar.mjs'
-import {deleteTask} from './borrar.mjs'
-import {searchUser} from './buscarUsuario.mjs'
+import {useListMain, listTasks, oneTask} from './listar.js';
+import { archivo, useCreateMain} from './crear.js'
+import {useUpdateMain} from './actualizar.js'
+import {deleteTask} from './borrar.js'
+import {searchUser} from './buscarUsuario.js'
 
 import readline from 'readline-sync';
 

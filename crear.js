@@ -1,4 +1,4 @@
-import {useListMain} from './listar.mjs';
+import {useListMain} from './listar.js';
 import fs from 'fs';
 import readline from 'readline-sync';
 
