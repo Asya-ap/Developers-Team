@@ -1,5 +1,15 @@
 import fs from 'fs';
-import {existFile, archivo} from './crear.mjs'
+import { searchElement } from './actualizar.js';
+import {existFile, archivo} from './crear.js'
+
+// listTasks: Te devuelve las tareas a no ser que exista algun error.
+// oneTask: Te muestra por consola una tarea concreta a no ser que no haya tareas
+// listsTasksOnlyUser: Devuelve [las tareas de una persona, sus id respectivos, todas las tareas]
+// onlyUser: Devuelve [las tareas de una persona, sus id respectivos]
+// useListMain: Si le pasas true a uno de los parametros, imprime las tareas de cada usuario. Siempre que pase las comprobaciones
+// useListMain: Devuelve lo mismo que listTasksOnlyUser
+
+// Mirar existFile(crear) , archivo(crear) y seachElement(actualizar)
 
 function listTasks(file = archivo, option ="y") {
     
@@ -20,6 +30,18 @@ function listTasks(file = archivo, option ="y") {
         return 1;
     }
 }
+function oneTask(file, user) {
+    var tasksData = useListMain(file, user, false);
+    var tasks = tasksData[2];
+    var idsUser = tasksData[1];
+    var elementData = searchElement(tasks, idsUser);
+    if (elementData[0] !== 0 && elementData[0] !== 2){
+        console.log(elementData[0]);
+    } else {
+        console.log("No Data");
+    }
+
+}
 
 function listTasksOnlyUser(file, user, option = 'y') {
     var tasks = listTasks(file, 'n');
@@ -29,7 +51,7 @@ function listTasksOnlyUser(file, user, option = 'y') {
             if (option === 'y') return [tasksUser[0], tasksUser[1], tasks];
             return tasksUser;
         }
-        return [2,2,2]
+        return [2,2,tasks]
     }
     return [tasks, tasks, tasks];
 
@@ -59,7 +81,7 @@ function onlyUser(user, devolver, option = 'y') {
 }
 
 function useListMain(file = archivo, user, show = false) {
-    const tasks = listTasksOnlyUser(file, user);
+    const tasks = listTasksOnlyUser(file, user, 'y');
     if (tasks[0] === 0 || tasks[0] === 2) {
         var message = tasks[0] === 0 ? "Check Json fil" : "You don't have any data";
         console.log(message);
@@ -72,4 +94,4 @@ function useListMain(file = archivo, user, show = false) {
 }
 
 
-export { useListMain, listTasks, onlyUser, listTasksOnlyUser};
+export { useListMain, listTasks, onlyUser, listTasksOnlyUser, oneTask};

@@ -1,12 +1,3 @@
 {
-    "tasks": [
-        {
-            "id": 1,
-            "user": "djadasd",
-            "description": "asd",
-            "date_start": "adsasd",
-            "date_end": "das",
-            "status": "ddsa"
-        }
-    ]
+    "tasks": []
 }

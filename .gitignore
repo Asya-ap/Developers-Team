@@ -1,9 +1,2 @@
-<<<<<<< HEAD
-
-//Archivos ignorados
-
-tasks.json
-=======
 node_modules/
 tasks.json
->>>>>>> develop

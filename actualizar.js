@@ -1,66 +1,52 @@
-// Imports del mismo modulo o del sistema
-import {listTasksOnlyUser } from './listar.mjs';
-import {archivo, writeJson, today, useCreateMain, newJson} from './crear.mjs'
-import fs from 'fs';
+import {listTasksOnlyUser } from './listar.js';
+import {archivo, today, useCreateMain, newJson} from './crear.js'
 import readline from 'readline-sync';
 
-// Constants para archivo y fechas
-
-const username = "Jhon";
-
-//* IMPORTANTE: 0 SIGNIFICA QUE USUARIO QUIERE SALIR
-//* IMPORTANTE: 1 SIGNIFICA ARCHIVO DAÑADO
-//* EMPORTANTE: 2 SIGNIFICA QUE NO TIENE NINGUNA TAREA
-
-// Constante que me ayudara a guardar el nuevo Json
-var newJsonFile = {};
-newJsonFile.tasks = [];
-
-
 var exitCase = ['Q', 'E', 'EXIT'];
-// elementId busca si es el id esta en la lista, devulve el elemento o un 0
-// searchElement pregunta por un id hasta que existe(elementId) o hasta que decide salir, devuelve el elemento y su indice o un 0 y el valor de busqueda en caso de que se decida salir
-// modifyThis modifica el elemento hasta que se diga, devulve el numero de modificaciones hechas
-// onlyUser te limita a unicamente tu usario, devuelve las tareas disponibles y los id que representan
-// sendThis imprime tu modificacion y actualiza las tareas
-// useUpdateMain llamar desde main
 
-function elementId(lista, id, option = "element") {
+// elementId: Busca si es el id esta en la lista, devulve [elemento,id del elemento en el array]
+// searchElement: Pregunta por un id hasta que existe o hasta que decide salir. Si le pasas un mal parametro te devuele un 0 o un 2.
+// SearchElement: Devuelve los mismo que elementId 
+// modifyThis: Modifica el elemento hasta que se diga, devulve el numero de modificaciones hechas
+// sendThis: Imprime tu modificacion y actualiza las tareas
+// makeChanges: Muestra los parametros actuales de tus tareas, llama a modifyThis. Devuelve [id de la tarea, 1 si se ha modificado algo]
+// makeDecision: Segun los parametros que le pases hace una accion o otra. Se usa mucho
+// useUpdateMain: llamar desde main, es el que se usa para hacer los cambios pertinentes en el Json
+
+// Mirar archivo(crear) , today(crear) , useCreateMain(crear) , newJson(crear)
+// Mirar listTasksOnlyUser(listar)
+
+function elementId(lista, id) {
     var element = 0;
-    var count = 0;
     lista.forEach(ele => {
-        count++;
         if (ele['id'] == id) {
             element = ele;
-            if (option == "element") {
-                return element;
-
-            }
-            return count; 
         }
     });
-    return element;
+    var count = lista.indexOf(element);
+    return [element, count];
 };
 
 function searchElement(vector, onlyId) {
     var element = 0;
     while (true) {
         console.log("If u want to exit write, (q, e or exit)");
-        var idThis = readline.question("Select a task (select an id): ");
-
+        console.log(onlyId);
+        if (typeof onlyId === "object") {
+            var idThis = readline.question("Select a task (select an id): ");
+        } else {
+            return[2,0]
+        }
         var idThisInt = parseInt(idThis);
         if (typeof idThisInt === 'number' && !isNaN(idThisInt)) {
             if (onlyId.includes(idThisInt)){
                 var element = elementId(vector, idThisInt);
-                return [element, idThisInt];
-                
+                return [element[0], element[1]];
             }
         } else {
             if ( exitCase.includes(idThis.toUpperCase()) ) {
                 return [0, idThis];
-                
             }
-                
         }
         console.log("You only can select "); 
         console.log(onlyId);
@@ -97,9 +83,8 @@ function sendThis(element, devolver, file= archivo, message = "update") {
 }
 
 
-function makeChanges(elementUser, idUser, parameter) {
-    console.log(elementUser);
-    console.log(idUser);
+function makeChanges(elementUser, idUser) {
+    var parameter = 0;
     if (elementUser != 0) {
         var keysElement = Object.keys(elementUser);
         keysElement.forEach( key => {
@@ -109,14 +94,14 @@ function makeChanges(elementUser, idUser, parameter) {
         var modified = modifyThis(elementUser);               
         parameter =  modified > 0 ?  1 : 0;
 
-    } else {
-        parameter = 0;
     }
     return [idUser, parameter];
 
 }
 
 function makeDesicion(boolError = false, parameter, devolver, element, id, file = archivo, user, option="update") {
+   // Vienen actualizados devolver y element valen lo mismo
+
     if (!boolError){
 
         if (parameter === 0) {
@@ -128,9 +113,9 @@ function makeDesicion(boolError = false, parameter, devolver, element, id, file 
                 sendThis(element, devolver, file, "update"); 
             }else {
                 console.log(element);
-                var questionCreate = readline.question("Really you want to delete this task? [Y or S, to say yes, anything else will be a no ] ");
+                var questionCreate = readline.question("Really you want to delete this task? [Y or S, to say yes, anything else will be a no ]: ");
                 if (questionCreate.toUpperCase() == 'Y' || questionCreate.toUpperCase() == 'S'){
-                    devolver.splice(id,1);
+                    devolver.splice(id, 1);
                     sendThis(element, devolver, file, "delete");
                 }
                 console.log("Have a nice day !");
@@ -150,8 +135,7 @@ function makeDesicion(boolError = false, parameter, devolver, element, id, file 
     }
 }
 
-
-
+//Poner llamada para imprimir
 function useUpdateMain(file = archivo, user ) {
     var finalActionUpdate = 0;
     var id = 0;

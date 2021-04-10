@@ -1,8 +1,8 @@
-import {useListMain, listTasks} from './listar.mjs';
-import { archivo, useCreateMain} from './crear.mjs'
-import {useUpdateMain} from './actualizar.mjs'
-import {deleteTask} from './borrar.mjs'
-import {searchUser} from './buscarUsuario.mjs'
+import {useListMain, listTasks, oneTask} from './listar.js';
+import { archivo, useCreateMain} from './crear.js'
+import {useUpdateMain} from './actualizar.js'
+import {deleteTask} from './borrar.js'
+import {searchUser} from './buscarUsuario.js'
 
 import readline from 'readline-sync';
 
@@ -30,6 +30,7 @@ function main() {
     action = initialPrompt();
 
   } else {
+    console.log(`\nHello ${username}, lets create a new task! \n`)
     action = "Create";
   }
 
@@ -52,18 +53,19 @@ function main() {
 
       case "Delete":
 
-      deleteTask();
+        deleteTask(archivo, username);
         action = initialPrompt();
         break;
 
       case "List all":
 
-        listTasks(archivo);
+        useListMain(archivo, username, true);
         action = initialPrompt();
         break;
 
       case "List specific":
 
+        oneTask(archivo, username);
         action = initialPrompt();
         break;
 
