@@ -1,12 +1,17 @@
 import {useListMain, listTasks, oneTask} from './listar.js';
-import { archivo, useCreateMain} from './crear.js'
+import { archivo } from './crear.js'
 import {useUpdateMain} from './actualizar.js'
 import {deleteTask} from './borrar.js'
-import {searchUser} from './buscarUsuario.js'
+import User from "./classes/user.js";
+import Task from "./classes/task.js";
+import utils from "./utils/utils.js";
 
 import readline from 'readline-sync';
+import fs from 'fs';
 
-function initialPrompt() {
+const path = "./jsonDB/tasks.json";
+
+function showAvailableActions() {
   const actions = ["Create", "Update", "Delete", "List all", "List specific"];
   const index = readline.keyInSelect(actions, "Select your action:");
 
@@ -16,62 +21,80 @@ function initialPrompt() {
 function main() {
   console.log("Welcome to the TO-DO list app!\n");
 
-  const username = readline.question("What is your username? ");
+  let user = new User(readline.question("What is your username? "));
 
-  const searchUsername = searchUser(username);
+  if (!fs.existsSync(path) || utils.isJsonEmptyOrMalformed(path)) {
+    fs.writeFileSync(path, JSON.stringify({ "tasks": [] }, null, 4));
+  }
+
   let action = "";
 
-  if (searchUsername) {
-    console.log(`\nHello again, ${username}!\n`);
+  user.getOwnTasks(path);
 
-    console.log("These are your current tasks:")
-    useListMain(archivo, username, true);
+  // Different greetings depending on if the user has tasks.  
+  if (user.ownTasks.length) {
+    console.log(`\nHello again, ${user.username}!\n`);
 
-    action = initialPrompt();
+    console.log("These are your current tasks:");
+    user.listAllTasks();
 
+  // If they don't, force them to choose Create.
   } else {
-    console.log(`\nHello ${username}, lets create a new task! \n`)
+    console.log(`\nThis is your first time here, ${user.username}. Let's create a new task! \n`);
     action = "Create";
   }
 
-
   let makingTasks = true;
 
-  while (makingTasks) {
+  while (makingTasks) {    
+    // New user must choose Create. 
+    // When the loop restarts, the user will have a task and will be able to choose an action.
+    if (user.ownTasks.length) {
+      action = showAvailableActions();
+
+      // Refresh tasks so that newly created tasks appear.
+      user.getOwnTasks(path);
+    }
+
     switch (action) {
       case "Create":
-        useCreateMain(archivo, username);
+        user.getMaxId(path);
 
-        action = initialPrompt();
+        user.currentTask = new Task(user, user.maxIdOfTask);
+
+        user.writeCurrentTask(path);
+        user.showCurrentTask();
+
         break;
 
       case "Update":
-        useUpdateMain(archivo, username);
+        user.askForId();
+        user.updateTask();
 
-        action = initialPrompt();
+        // useUpdateMain(archivo, user.username);
+
         break;
 
       case "Delete":
+        user.askForId();
+        user.deleteTask(path);
 
-        deleteTask(archivo, username);
-        action = initialPrompt();
         break;
 
       case "List all":
+        user.listAllTasks();
 
-        useListMain(archivo, username, true);
-        action = initialPrompt();
         break;
 
       case "List specific":
+        oneTask(archivo, user.username);
 
-        oneTask(archivo, username);
-        action = initialPrompt();
         break;
 
       default:
         makingTasks = false;
         console.log("Goodbye!");
+
         break;
     }
   }
