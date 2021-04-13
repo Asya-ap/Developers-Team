@@ -13,7 +13,7 @@ class User {
     
     askForId() {
         this.askedId = Number(
-            readline.question("Which id? ", { limit: /^\d+$/, 
+            readline.question("\nWhich id? ", { limit: /^\d+$/, 
                 limitMessage: "Please, input an integer." })
             );
     }
@@ -26,14 +26,16 @@ class User {
         ).indexOf(this.askedId);
 
         if (removeIndex === -1) {
-            console.log("Could not find the id, please check the ids of your tasks.")
+            console.log("\nCould not find the id, please check the ids of your tasks.")
 
-            return;
+            return false;
         }
 
         this.ownTasks.splice(removeIndex, 1);
         
         fs.writeFileSync(path, JSON.stringify({ "tasks": this.ownTasks }, null, 4));
+
+        return true;
     }
 
     // Find where we can insert the new task in the Json file.
@@ -51,7 +53,7 @@ class User {
     }
 
     getOwnTasks(path) {
-        // Reinitialize ownTasks since this can push tasks that are there.
+        // Reinitialize ownTasks since this can push tasks that are already there.
         this.ownTasks = [];
         const allTasks = utils.readAndParseAllTasks(path);
         
@@ -66,6 +68,17 @@ class User {
         console.log(this.ownTasks);
     }
 
+    listOneTask () {
+        for (const task of this.ownTasks) {
+            if (task.id === this.askedId) {
+                console.log(task);
+                return;
+            }
+        }
+
+        console.log("\nCould not find the id, please check the ids of your tasks.");
+    }
+
     showCurrentTask() {
         console.log("\nAdded task:\n");
         console.log(this.currentTask);
@@ -73,18 +86,39 @@ class User {
 
     updateTask(path) {
         for (const task of this.ownTasks) {
-            if (task.id === id) {
+            if (task.id === this.askedId) {
                 this.currentTask = task;
                 break;
             }
         }
 
-        this.deleteTask(path);
+        if (!this.deleteTask(path)) {
+            return;
+        }
 
-        // desc, dstart, dend, status.
+        console.log("\nIf you do not want to change a task field, leave it empty:\n");
 
-        this.currentTask.description = readline.question("Previous ") 
+        const newDesc = readline.question(
+            `Previous value was ${this.currentTask.description}, write something to change the description: `
+        );                
+        this.currentTask.description = newDesc === "" ? this.currentTask.description : newDesc;
 
+        const newDateStart = readline.question(
+            `Previous value was ${this.currentTask.date_start}, write something to change the start date: `
+        );        
+        this.currentTask.date_start = newDateStart === "" ? this.currentTask.date_start : newDateStart;
+
+        const newDateEnd = readline.question(
+            `Previous value was ${this.currentTask.date_end}, write something to change the end date: `
+        );        
+        this.currentTask.date_end = newDateEnd === "" ? this.currentTask.date_end : newDateEnd;
+
+        const newStatus = readline.question(
+            `Previous value was ${this.currentTask.status}, write something to change the status: `
+        );        
+        this.currentTask.status = newStatus === "" ? this.currentTask.status : newStatus;
+
+        this.writeCurrentTask(path);
     }
 
     writeCurrentTask(path) {

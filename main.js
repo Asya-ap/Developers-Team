@@ -1,7 +1,3 @@
-import {useListMain, listTasks, oneTask} from './listar.js';
-import { archivo } from './crear.js'
-import {useUpdateMain} from './actualizar.js'
-import {deleteTask} from './borrar.js'
 import User from "./classes/user.js";
 import Task from "./classes/task.js";
 import utils from "./utils/utils.js";
@@ -23,6 +19,7 @@ function main() {
 
   let user = new User(readline.question("What is your username? "));
 
+  // Check if there is something wrong with the json file.
   if (!fs.existsSync(path) || utils.isJsonEmptyOrMalformed(path)) {
     fs.writeFileSync(path, JSON.stringify({ "tasks": [] }, null, 4));
   }
@@ -31,7 +28,7 @@ function main() {
 
   user.getOwnTasks(path);
 
-  // Different greetings depending on if the user has tasks.  
+  // Different greetings depending on whether the user has tasks or not.  
   if (user.ownTasks.length) {
     console.log(`\nHello again, ${user.username}!\n`);
 
@@ -58,6 +55,7 @@ function main() {
 
     switch (action) {
       case "Create":
+        // Where to write in the json.
         user.getMaxId(path);
 
         user.currentTask = new Task(user, user.maxIdOfTask);
@@ -69,9 +67,7 @@ function main() {
 
       case "Update":
         user.askForId();
-        user.updateTask();
-
-        // useUpdateMain(archivo, user.username);
+        user.updateTask(path);
 
         break;
 
@@ -87,7 +83,8 @@ function main() {
         break;
 
       case "List specific":
-        oneTask(archivo, user.username);
+        user.askForId();
+        user.listOneTask();
 
         break;
 
