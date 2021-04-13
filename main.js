@@ -51,13 +51,14 @@ function main() {
   let makingTasks = true;
 
   while (makingTasks) {    
+    // Refresh tasks so that newly created tasks appear.
+    user.getOwnTasks(path);
+
     // New user must choose Create. 
     // When the loop restarts, the user will have a task and will be able to choose an action.
     if (user.ownTasks.length) {
-      action = showAvailableActions();
 
-      // Refresh tasks so that newly created tasks appear.
-      user.getOwnTasks(path);
+      action = showAvailableActions();
     }
 
     switch (action) {
