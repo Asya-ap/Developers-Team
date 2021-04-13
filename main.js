@@ -7,6 +7,7 @@ import fs from 'fs';
 import pt from "path";
 
 const path = pt.join("./jsonDB/tasks.json");
+const makefolder = pt.join("./jsonDB");
 
 function showAvailableActions() {
   const actions = ["Create", "Update", "Delete", "List all", "List specific"];
@@ -24,7 +25,7 @@ function main() {
   if (!fs.existsSync(makefolder)){
       fs.mkdirSync(makefolder);
   }
-  
+
   // Check if there is something wrong with the json file.
   if (!fs.existsSync(path) || utils.isJsonEmptyOrMalformed(path)) {
     fs.writeFileSync(path, JSON.stringify({ "tasks": [] }, null, 4));
