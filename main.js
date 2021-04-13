@@ -4,8 +4,9 @@ import utils from "./utils/utils.js";
 
 import readline from 'readline-sync';
 import fs from 'fs';
+import pt from "path";
 
-const path = "./jsonDB/tasks.json";
+const path = pt.join("./jsonDB/tasks.json");
 
 function showAvailableActions() {
   const actions = ["Create", "Update", "Delete", "List all", "List specific"];
