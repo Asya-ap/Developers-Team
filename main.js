@@ -20,6 +20,11 @@ function main() {
 
   let user = new User(readline.question("What is your username? "));
 
+  // Create folder if it does not exist.
+  if (!fs.existsSync(makefolder)){
+      fs.mkdirSync(makefolder);
+  }
+  
   // Check if there is something wrong with the json file.
   if (!fs.existsSync(path) || utils.isJsonEmptyOrMalformed(path)) {
     fs.writeFileSync(path, JSON.stringify({ "tasks": [] }, null, 4));
